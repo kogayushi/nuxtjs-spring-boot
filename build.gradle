@@ -1,0 +1,108 @@
+buildscript {
+  ext {
+    springBootVersion = '2.1.1.RELEASE'
+    gradleNodeVersion = '1.2.0'
+  }
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath "com.moowork.gradle:gradle-node-plugin:${gradleNodeVersion}"
+  }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'com.moowork.node'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+
+dependencies {
+  implementation('org.springframework.boot:spring-boot-starter-web')
+  runtimeOnly('org.springframework.boot:spring-boot-devtools')
+  compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+  compileOnly('org.projectlombok:lombok')
+  testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src_back/main/java'
+    }
+    resources {
+      srcDir 'src_back/main/resources'
+    }
+  }
+  test {
+    java {
+      srcDir 'src_back/test/java'
+    }
+    resources {
+      srcDir 'src_back/test/resources'
+    }
+  }
+}
+
+idea {
+  module {
+    inheritOutputDirs = false
+
+    // when use doma, outputDir are should be 'build/classes{main,test}
+    outputDir file('build/classes/java/main')
+    testOutputDir file('build/classes/java/test')
+    downloadJavadoc = true
+    downloadSources = true
+  }
+  project {
+    ipr {
+      withXml { provider ->
+        // Get XML as groovy.util.Node to work with.
+        def projectXml = provider.asNode()
+
+        // Find compiler configuration component.
+        def compilerConfiguration = projectXml.component.find { component ->
+          component.'@name' == 'CompilerConfiguration'
+        }
+
+        // Replace current annotationProcessing
+        // that is part of the compiler configuration.
+        def currentAnnotationProcessing = compilerConfiguration.annotationProcessing
+        currentAnnotationProcessing.replaceNode {
+          annotationProcessing {
+            profile(name: 'Default', default: true, enabled: true) {
+              sourceOutputDir(name: "build/generated/source/apt/main")
+              sourceTestOutputDir(name: "build/generated/source/apt/test")
+              outputRelativeToContentRoot(value: "true")
+              processorPath(useClasspath: true)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+task generateNuxtJs(type: NpmTask, dependsOn: 'npm_install') {
+  args = ['run', 'generate']
+}
+
+
+generateNuxtJs.mustRunAfter compileJava
+bootJar.dependsOn generateNuxtJs
