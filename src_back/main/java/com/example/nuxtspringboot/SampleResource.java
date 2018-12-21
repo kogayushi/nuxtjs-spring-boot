@@ -11,6 +11,6 @@ public class SampleResource {
 
   @GetMapping(path = "/hello", produces = MediaType.TEXT_PLAIN_VALUE)
   public String hello() {
-    return "hello";
+    return "ブロリー";
   }
 }
