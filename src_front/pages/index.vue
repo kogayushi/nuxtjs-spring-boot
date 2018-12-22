@@ -3,7 +3,7 @@
     <div>
       <logo/>
       <h1 class="title">
-        nuxt-spring-boot
+        nuxtjs-spring-boot
       </h1>
       <h2 class="subtitle">
         My remarkable Nuxt.js project
@@ -18,6 +18,18 @@
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
+      <form
+        action="/logout"
+        method="post">
+        <input
+          class="button--grey"
+          type="submit"
+          value="Sing Out">
+        <input
+          :value="xsrfToken"
+          type="hidden"
+          name="_csrf">
+      </form>
     </div>
   </section>
 </template>
@@ -28,6 +40,11 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  async asyncData() {
+    let xsrfToken = ((document.cookie + ';').match('XSRF-TOKEN=([^¥S;]*)') ||
+      [])[1]
+    return { xsrfToken: xsrfToken }
   }
 }
 </script>

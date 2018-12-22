@@ -1,4 +1,4 @@
-# nuxt-spring-boot
+# nuxtjs-spring-boot
 
 > My remarkable Nuxt.js project
 
