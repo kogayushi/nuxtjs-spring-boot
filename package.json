@@ -13,13 +13,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.0.0",
+    "@nuxtjs/axios": "^5.3.6",
+    "acorn": "^6.0.4",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.3.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
-    "eslint": "^5.10.0",
+    "eslint": "^4.19.1",
     "eslint-config-prettier": "^3.3.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-prettier": "^2.6.2",

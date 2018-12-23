@@ -34,6 +34,8 @@ repositories {
 
 dependencies {
   implementation('org.springframework.boot:spring-boot-starter-web')
+  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   runtimeOnly('org.springframework.boot:spring-boot-devtools')
   compileOnly('org.springframework.boot:spring-boot-configuration-processor')
   compileOnly('org.projectlombok:lombok')
@@ -106,3 +108,4 @@ task generateNuxtJs(type: NpmTask, dependsOn: 'npm_install') {
 
 generateNuxtJs.mustRunAfter compileJava
 bootJar.dependsOn generateNuxtJs
+bootRun.dependsOn generateNuxtJs

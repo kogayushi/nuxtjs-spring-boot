@@ -2,7 +2,9 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'spa',
-
+  router: {
+    mode: 'history'
+  },
   /*
   ** Headers of the page
   */
@@ -13,9 +15,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   /*
@@ -26,14 +26,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: ['~/plugins/axios.js'],
 
   /*
   ** Nuxt.js modules
@@ -46,6 +44,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
+    proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
 
@@ -70,6 +69,9 @@ module.exports = {
   },
   srcDir: 'src_front/',
   generate: {
-    dir: 'build/classes/java/main/static'
+    dir: 'build/resources/main/static'
+  },
+  proxy: {
+    '/api': 'http://localhost:8080'
   }
 }
