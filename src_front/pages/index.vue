@@ -3,48 +3,42 @@
     <div>
       <logo/>
       <h1 class="title">
-        nuxtjs-spring-boot
+        nuxt.js is hosted by spring boot
       </h1>
       <h2 class="subtitle">
-        My remarkable Nuxt.js project
+        Hello {{ name }}.
       </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-      <form
-        action="/logout"
-        method="post">
-        <input
-          class="button--grey"
-          type="submit"
-          value="Sing Out">
-        <input
-          :value="xsrfToken"
-          type="hidden"
-          name="_csrf">
-      </form>
+      <logout url="/logout"/>
+      <button
+        class="button--grey"
+        @click="reload"
+      >reload
+      </button>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import Logout from '~/components/Logout.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    Logout
   },
-  async asyncData() {
+  async asyncData(app) {
     let xsrfToken = ((document.cookie + ';').match('XSRF-TOKEN=([^¥S;]*)') ||
       [])[1]
-    return { xsrfToken: xsrfToken }
+    let response = await app.$axios.get(`/api/hello`)
+
+    return { xsrfToken: xsrfToken, name: response.data }
+  },
+  methods: {
+    async reload() {
+      let response = await this.$axios.get(`/api/hello`)
+      this.name = response.data
+    }
   }
 }
 </script>

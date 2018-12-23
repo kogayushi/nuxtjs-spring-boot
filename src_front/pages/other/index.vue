@@ -3,11 +3,8 @@
     <div>
       <logo/>
       <h1 class="title">
-        OTHER
+        This is other page to test
       </h1>
-      <h2 class="subtitle">
-        {{ hello }}
-      </h2>
     </div>
   </section>
 </template>
@@ -19,10 +16,6 @@ import axios from 'axios'
 export default {
   components: {
     Logo
-  },
-  async asyncData() {
-    let response = await axios.get(`/api/hello`)
-    return { hello: response.data }
   }
 }
 </script>
