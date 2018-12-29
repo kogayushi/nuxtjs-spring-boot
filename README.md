@@ -1,22 +1,19 @@
 # nuxtjs-spring-boot
 
-> My remarkable Nuxt.js project
+This is sample project which explain how to package spa in spring boot's executable jar.
+## How to run for development
 
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
+### Front end application
+```bash
 $ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+### Back end application
+```bash
+$ ./gradlew bootRun
+```
+
+### How to package both application in jar
+```bash
+$ ./gradlew build
+```
