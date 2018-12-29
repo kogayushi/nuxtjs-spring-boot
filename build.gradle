@@ -104,7 +104,5 @@ task generateNuxtJs(type: NpmTask, dependsOn: 'npm_install') {
   args = ['run', 'generate']
 }
 
-
 generateNuxtJs.mustRunAfter compileJava
 bootJar.dependsOn generateNuxtJs
-bootRun.dependsOn generateNuxtJs
