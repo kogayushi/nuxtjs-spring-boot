@@ -1,5 +1,7 @@
 <template>
   <div>
+    <nuxt-link to="/">TOP</nuxt-link>
+    <nuxt-link to="/other">OTHER PAGE</nuxt-link>
     <nuxt/>
   </div>
 </template>

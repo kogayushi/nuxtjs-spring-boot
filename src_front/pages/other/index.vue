@@ -1,24 +1,12 @@
 <template>
   <section class="container">
     <div>
-      <logo/>
       <h1 class="title">
-        This is other page to test
+        This is other page to demo
       </h1>
     </div>
   </section>
 </template>
-
-<script>
-import Logo from '~/components/Logo.vue'
-import axios from 'axios'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
 
 <style>
 .container {
