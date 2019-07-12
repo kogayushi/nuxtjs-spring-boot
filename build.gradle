@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    springBootVersion = '2.1.1.RELEASE'
+    springBootVersion = '2.1.6.RELEASE'
     gradleNodeVersion = '1.2.0'
   }
   repositories {
@@ -101,7 +101,7 @@ idea {
 
 
 task generateNuxtJs(type: NpmTask, dependsOn: 'npm_install') {
-  args = ['run', 'generate']
+  args = ['run', 'build']
 }
 
 generateNuxtJs.mustRunAfter compileJava
