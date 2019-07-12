@@ -6,7 +6,7 @@
       ref="button"
       class="button--grey"
       type="submit"
-      value="Sing Out">
+      value="Sign Out">
     <input
       :value="xsrfToken"
       type="hidden"
